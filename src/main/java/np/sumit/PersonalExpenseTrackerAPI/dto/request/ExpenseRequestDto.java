@@ -1,7 +1,9 @@
-package np.sumit.PersonalExpenseTrackerAPI.dto;
+package np.sumit.PersonalExpenseTrackerAPI.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,17 +15,19 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 public class ExpenseRequestDto {
-    @NotBlank
+    @NotBlank(message = "title is required")
     private String title;
 
     private String description;
 
-    @NotNull
+    @NotNull(message = "Amount is required")
+    @PositiveOrZero(message = "Amount cannot be negative")
     private Double amount;
 
-    @NotNull
+    @NotNull(message = "category is required")
     private Category category;
 
-    @NotNull
+    @NotNull(message = "expenseDate is required")
+    @PastOrPresent(message = "Expense date cannot be in the future")
     private LocalDate expenseDate;
 }

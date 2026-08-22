@@ -1,6 +1,8 @@
 package np.sumit.PersonalExpenseTrackerAPI.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.Positive;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -25,6 +27,7 @@ public class Expense {
     private String description;
 
     @Column(nullable = false)
+    @Positive
     private Double amount;
 
     @Enumerated(EnumType.STRING)
@@ -32,9 +35,17 @@ public class Expense {
     private Category category;
 
     @Column(nullable = false)
+    @PastOrPresent
     private LocalDate expenseDate;
 
     @Column(nullable = false)
     @CreationTimestamp
     private LocalDateTime createdAt;
+
+    @ManyToOne
+    @JoinColumn(
+            name = "user_id",
+            nullable = false
+    )
+    private User user;
 }

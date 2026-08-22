@@ -1,4 +1,4 @@
-package np.sumit.PersonalExpenseTrackerAPI.dto;
+package np.sumit.PersonalExpenseTrackerAPI.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.AllArgsConstructor;

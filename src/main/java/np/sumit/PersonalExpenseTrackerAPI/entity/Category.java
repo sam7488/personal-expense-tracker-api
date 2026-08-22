@@ -6,5 +6,6 @@ public enum Category {
     SHOPPING,
     BILLS,
     ENTERTAINMENT,
+    TRAVEL,
     OTHERS
 }

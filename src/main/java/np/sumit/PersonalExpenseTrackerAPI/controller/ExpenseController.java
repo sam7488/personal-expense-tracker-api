@@ -1,9 +1,10 @@
 package np.sumit.PersonalExpenseTrackerAPI.controller;
 
-import np.sumit.PersonalExpenseTrackerAPI.dto.ExpenseRequestDto;
-import np.sumit.PersonalExpenseTrackerAPI.dto.ExpenseResponseDto;
-import np.sumit.PersonalExpenseTrackerAPI.dto.ExpenseSummaryResponseDto;
-import np.sumit.PersonalExpenseTrackerAPI.dto.ExpenseTotalResponseDto;
+import jakarta.validation.Valid;
+import np.sumit.PersonalExpenseTrackerAPI.dto.request.ExpenseRequestDto;
+import np.sumit.PersonalExpenseTrackerAPI.dto.response.ExpenseResponseDto;
+import np.sumit.PersonalExpenseTrackerAPI.dto.response.ExpenseSummaryResponseDto;
+import np.sumit.PersonalExpenseTrackerAPI.dto.response.ExpenseTotalResponseDto;
 import np.sumit.PersonalExpenseTrackerAPI.entity.Category;
 import np.sumit.PersonalExpenseTrackerAPI.service.ExpenseService;
 import org.springframework.http.HttpStatus;
@@ -23,7 +24,7 @@ public class ExpenseController {
     }
 
     @PostMapping
-    public ResponseEntity<ExpenseResponseDto> addExpense(@RequestBody ExpenseRequestDto expenseRequestDto) {
+    public ResponseEntity<ExpenseResponseDto> addExpense(@Valid @RequestBody ExpenseRequestDto expenseRequestDto) {
         ExpenseResponseDto responseDto = expenseService.createExpense(expenseRequestDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(responseDto);
     }
@@ -37,12 +38,6 @@ public class ExpenseController {
         return ResponseEntity.ok(
                 expenseService.getExpenses(category, from, to)
         );
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<ExpenseResponseDto> getExpenseById(@PathVariable Long id){
-        ExpenseResponseDto responseDto = expenseService.getExpenseById(id);
-        return ResponseEntity.ok(responseDto);
     }
 
     @PutMapping("/{id}")

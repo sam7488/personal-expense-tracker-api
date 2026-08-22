@@ -1,7 +1,7 @@
 package np.sumit.PersonalExpenseTrackerAPI.mapper;
 
-import np.sumit.PersonalExpenseTrackerAPI.dto.ExpenseRequestDto;
-import np.sumit.PersonalExpenseTrackerAPI.dto.ExpenseResponseDto;
+import np.sumit.PersonalExpenseTrackerAPI.dto.request.ExpenseRequestDto;
+import np.sumit.PersonalExpenseTrackerAPI.dto.response.ExpenseResponseDto;
 import np.sumit.PersonalExpenseTrackerAPI.entity.Expense;
 import org.springframework.stereotype.Component;
 

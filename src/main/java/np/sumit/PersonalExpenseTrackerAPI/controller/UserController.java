@@ -1,7 +1,9 @@
 package np.sumit.PersonalExpenseTrackerAPI.controller;
 
-import np.sumit.PersonalExpenseTrackerAPI.dto.UserRequestDto;
-import np.sumit.PersonalExpenseTrackerAPI.dto.UserResponseDto;
+import jakarta.validation.Valid;
+import np.sumit.PersonalExpenseTrackerAPI.dto.request.SignUpRequestDto;
+import np.sumit.PersonalExpenseTrackerAPI.dto.request.UserRequestDto;
+import np.sumit.PersonalExpenseTrackerAPI.dto.response.UserResponseDto;
 import np.sumit.PersonalExpenseTrackerAPI.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/users")
 public class UserController {
     private final UserService userService;
     
@@ -18,21 +20,32 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping
-    public ResponseEntity<UserResponseDto> addUser(@RequestBody UserRequestDto userRequestDto) {
-        UserResponseDto responseDto = userService.createUser(userRequestDto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(responseDto);
-    }
-
-    @GetMapping
-    public ResponseEntity<List<UserResponseDto>> addUser() {
-        List<UserResponseDto> responseDto = userService.getAllUser();
-        return ResponseEntity.ok(responseDto);
+    @PostMapping("/signup")
+    public ResponseEntity<UserResponseDto> addUser(@Valid @RequestBody SignUpRequestDto requestDto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(userService.createUser(requestDto));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<UserResponseDto> getUserById(@PathVariable Long id){
         UserResponseDto responseDto = userService.getUserById(id);
+        return ResponseEntity.ok(responseDto);
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<UserResponseDto> getUsers(
+            @RequestParam(required = false) String username,
+            @RequestParam(required = false) String email
+    ) {
+        UserResponseDto responseDto = userService.getUserByUsernameOrEmail(
+                username,
+                email
+        );
+        return ResponseEntity.ok(responseDto);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<UserResponseDto>> getUsers() {
+        List<UserResponseDto> responseDto = userService.getAllUser();
         return ResponseEntity.ok(responseDto);
     }
 

@@ -1,36 +1,63 @@
 # Personal Expense Tracker API
 
-A REST API for managing personal expenses built with Spring Boot.
+A REST API built with Spring Boot for managing personal expenses, users, and roles.
 
-## What it does
+This is a practice project where I applied what I learned about Spring Boot, JPA, Spring Security, JWT authentication, validation, exception handling, and testing.
 
-- Create, update, view and delete expenses
-- Categorize expenses
-- Calculate total expenses
-- Get expense summaries by category
+## Features
+
+- User registration and login
+- JWT-based authentication
+- Role-based authorization (`USER` and `ADMIN`)
+- Create, read, update, and delete expenses
+- Each user can only access their own expenses
 - Filter expenses by category and date range
-- Validate expense data
-- Handle application exceptions globally
+- Calculate total expenses
+- Generate expense summaries by category
+- User and role management
+- Validation and global exception handling
 
-## Current Progress
+## Project Structure
 
-- Expense CRUD
-- Expense filtering
-- Expense total and summary
-- Validation
-- Custom exceptions
-- Global exception handling
+```text
+config/         → Security configuration and data initialization
+controller/     → REST API endpoints
+dto/            → Request and response objects
+entity/         → JPA entities and security user details
+exception/      → Custom exceptions and global exception handling
+mapper/         → Entity ↔ DTO mapping
+repository/     → Database access
+service/        → Business logic and authentication
+```
 
-## Tech Stack
+## Main API
 
-- Java
-- Spring Boot
-- Spring Data JPA
-- MySQL
-- Maven
+```text
+POST   /auth/login
 
-## Future Plans
+POST   /api/users/signup
 
-- User authentication
-- JWT-based authorization
-- User-specific expenses
+GET    /api/expenses
+POST   /api/expenses
+GET    /api/expenses/{id}
+PUT    /api/expenses
+DELETE /api/expenses
+
+GET    /api/expenses/total
+GET    /api/expenses/summary
+
+GET    /api/roles
+POST   /api/roles
+```
+
+## Authentication
+
+After logging in, the API returns a JWT access token.
+
+The token is sent with protected requests:
+
+```text
+Authorization: Bearer <access-token>
+```
+
+Normal users can manage their own expenses, while admin users have access to user and role management.
