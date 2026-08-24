@@ -1,11 +1,8 @@
 package np.sumit.PersonalExpenseTrackerAPI.mapper;
 
 import np.sumit.PersonalExpenseTrackerAPI.dto.request.RoleRequestDto;
-import np.sumit.PersonalExpenseTrackerAPI.dto.request.SignUpRequestDto;
 import np.sumit.PersonalExpenseTrackerAPI.dto.response.RoleResponseDto;
-import np.sumit.PersonalExpenseTrackerAPI.dto.response.UserResponseDto;
 import np.sumit.PersonalExpenseTrackerAPI.entity.Role;
-import np.sumit.PersonalExpenseTrackerAPI.entity.User;
 import org.springframework.stereotype.Component;
 
 @Component

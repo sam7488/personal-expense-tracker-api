@@ -101,8 +101,8 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
     }
 
-    @ExceptionHandler(UserNameAlreadyExistsException.class)
-    public ResponseEntity<ErrorResponse> handleInvalidUserName(UserNameAlreadyExistsException ex) {
+    @ExceptionHandler(UsernameAlreadyExistsException.class)
+    public ResponseEntity<ErrorResponse> handleInvalidUserName(UsernameAlreadyExistsException ex) {
         ErrorResponse errorResponse = new ErrorResponse(
                 "USERNAME_ALREADY_EXISTS",
                 ex.getMessage(),
@@ -113,8 +113,8 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
     }
 
-    @ExceptionHandler(UserNameNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleUserNameNotFoundException(UserNameNotFoundException ex) {
+    @ExceptionHandler(UsernameNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleUserNameNotFoundException(UsernameNotFoundException ex) {
         ErrorResponse errorResponse = new ErrorResponse(
                 "USERNAME_NOT_FOUND",
                 ex.getMessage(),
@@ -162,8 +162,8 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
     }
 
-    @ExceptionHandler(InvalidIdentifier.class)
-    public ResponseEntity<ErrorResponse> handleInvalidIdentifier(InvalidIdentifier ex) {
+    @ExceptionHandler(InvalidIdentifierException.class)
+    public ResponseEntity<ErrorResponse> handleInvalidIdentifier(InvalidIdentifierException ex) {
         ErrorResponse errorResponse = new ErrorResponse(
                 "IDENTIFIERS_DO_NOT_MATCH",
                 ex.getMessage(),

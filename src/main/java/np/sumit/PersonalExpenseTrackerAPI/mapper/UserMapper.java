@@ -14,7 +14,12 @@ public class UserMapper {
         return user;
     }
 
-    public UserResponseDto toResponseDto(User user) {
-        return new UserResponseDto(user, "User Added Successfully");
+    public UserResponseDto toResponseDto(User user, String message) {
+        return new UserResponseDto(
+                user.getId(),
+                user.getUsername(),
+                user.getEmail(),
+                message
+        );
     }
 }

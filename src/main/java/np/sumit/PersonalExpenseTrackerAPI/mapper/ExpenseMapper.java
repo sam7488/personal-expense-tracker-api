@@ -12,41 +12,23 @@ public class ExpenseMapper {
         expense.setTitle(req.getTitle());
         expense.setDescription(req.getDescription());
         expense.setAmount(req.getAmount());
-
-        if(req.getCategory()!=null) {
-            expense.setCategory(req.getCategory());
-        }
-
+        expense.setCategory(req.getCategory());
         expense.setExpenseDate(req.getExpenseDate());
         return expense;
     }
 
-    public ExpenseResponseDto toDto(Expense expense) {
+    public ExpenseResponseDto toResponseDto(Expense expense) {
         ExpenseResponseDto responseDto = new ExpenseResponseDto(expense);
         responseDto.setMessage("Expense added successfully");
         return responseDto;
     }
 
     public ExpenseResponseDto updateAndToResponseDto(ExpenseRequestDto req, Expense expense) {
-        if(req.getTitle()!=null) {
-            expense.setTitle(req.getTitle());
-        }
-        if(req.getDescription()!=null) {
-            expense.setDescription(req.getDescription());
-        }
-        if(req.getAmount()!=null) {
-            expense.setAmount(req.getAmount());
-        }
-        if(req.getCategory()!=null) {
-            expense.setCategory(req.getCategory());
-        }
-        if(req.getExpenseDate()!=null) {
-            expense.setExpenseDate(req.getExpenseDate());
-        }
-
-        ExpenseResponseDto responseDto = new ExpenseResponseDto(expense);
-        responseDto.setMessage("Expense Updated successfully");
-
-        return responseDto;
+        expense.setTitle(req.getTitle());
+        expense.setDescription(req.getDescription());
+        expense.setAmount(req.getAmount());
+        expense.setCategory(req.getCategory());
+        expense.setExpenseDate(req.getExpenseDate());
+        return toResponseDto(expense);
     }
 }

@@ -44,7 +44,7 @@ public class ExpenseService {
 
         expenseRepository.save(expense);
 
-        return expenseMapper.toDto(expense);
+        return expenseMapper.toResponseDto(expense);
     }
 
     public List<ExpenseResponseDto> getExpenses(Category category, LocalDate from, LocalDate to) {
@@ -80,7 +80,7 @@ public class ExpenseService {
             expenses = expenseRepository.findByUser(user);
         }
 
-        return expenses.stream().map(expenseMapper::toDto).toList();
+        return expenses.stream().map(expenseMapper::toResponseDto).toList();
     }
 
     @Transactional
@@ -102,7 +102,6 @@ public class ExpenseService {
                 .orElseThrow(
                         () -> new ExpenseNotFoundException("Expense with id: " + id + " not found")
                 );
-
 
         expenseRepository.delete(expense);
     }

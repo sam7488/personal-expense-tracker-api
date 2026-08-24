@@ -48,4 +48,13 @@ public class Expense {
             nullable = false
     )
     private User user;
+
+    public Expense(String title, String description, Double amount, Category category, LocalDate expenseDate, User user) {
+        this.title = title;
+        this.description = description;
+        this.amount = amount;
+        this.category = category;
+        this.expenseDate = expenseDate;
+        this.user = user;
+    }
 }

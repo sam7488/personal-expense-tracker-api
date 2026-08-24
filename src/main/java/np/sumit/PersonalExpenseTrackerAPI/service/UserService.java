@@ -37,21 +37,21 @@ public class UserService {
 
     @Transactional
     public UserResponseDto createUser(SignUpRequestDto reqDto) {
+        if (reqDto.getUsername().matches(".*\\s+.*")) {
+            throw new InvalidUsernameException(
+                    "Username cannot contain spaces or special characters. " +
+                            "Only letters, numbers, and underscores are allowed."
+            );
+        }
+
         if(userRepository.existsByUsername(reqDto.getUsername())) {
-            throw new UserNameAlreadyExistsException(
+            throw new UsernameAlreadyExistsException(
                     "username " + reqDto.getUsername() + " is not available"
             );
         }
         if(userRepository.existsByEmail(reqDto.getEmail())) {
             throw new EmailAlreadyExistsException(
-                    "email " + reqDto.getEmail() + " is not available"
-            );
-        }
-
-        if (reqDto.getUsername().matches(".*\\s+.*")) {
-            throw new InvalidUsernameException(
-                    "Username cannot contain spaces or special characters. " +
-                            "Only letters, numbers, and underscores are allowed."
+                    "email " + reqDto.getEmail() + " is already in use"
             );
         }
 
@@ -68,7 +68,7 @@ public class UserService {
         user.getRoles().add(role);
 
         userRepository.save(user);
-        return userMapper.toResponseDto(user);
+        return userMapper.toResponseDto(user, "User Created Successfully");
     }
 
     public UserResponseDto getUserByUsernameOrEmail(String username, String email) {
@@ -85,13 +85,13 @@ public class UserService {
         if(hasUserName) {
             user = userRepository.findByUsername(username)
                     .orElseThrow(
-                            () -> new UserNameNotFoundException(
-                                    "username doesn't exist"
+                            () -> new UsernameNotFoundException(
+                                    "Username doesn't exist"
                             )
                     );
             if(hasEmail && !email.equals(user.getEmail())) {
-                throw new InvalidIdentifier(
-                        "username and email don't match"
+                throw new InvalidIdentifierException(
+                        "Username and email don't match"
                 );
             }
         }
@@ -104,7 +104,7 @@ public class UserService {
                     );
         }
 
-        return userMapper.toResponseDto(user);
+        return userMapper.toResponseDto(user, "User Found Successfully");
     }
 
     public UserResponseDto getUserById(Long id) {
@@ -112,12 +112,12 @@ public class UserService {
                 .orElseThrow(
                         () -> new UserNotFoundException("User with id: " + id + " not found")
                 );
-        return userMapper.toResponseDto(user);
+        return userMapper.toResponseDto(user,  "User Found Successfully");
     }
 
     public List<UserResponseDto> getAllUser() {
         List<User> users = userRepository.findAll();
-        return users.stream().map(userMapper::toResponseDto).toList();
+        return users.stream().map(user -> userMapper.toResponseDto(user, "All users Fetched")).toList();
     }
 
     @Transactional
@@ -127,23 +127,29 @@ public class UserService {
                         () -> new UserNotFoundException("User with id: " + id + " not found")
                 );
 
-        if(userRequestDto.getUsername() != null && !userRepository.existsByUsername(userRequestDto.getUsername())) {
-            existingUser.setUsername(userRequestDto.getUsername());
+        if(userRepository.existsByUsername(userRequestDto.getUsername())) {
+            throw new UsernameAlreadyExistsException(
+                    "username " + userRequestDto.getUsername() + " is not available"
+            );
         }
-        if(userRequestDto.getEmail() != null && !userRepository.existsByEmail(userRequestDto.getEmail())) {
-            existingUser.setEmail(userRequestDto.getEmail());
-        }
-        if(userRequestDto.getPassword() != null) {
-            existingUser.setPassword(passwordEncoder.encode(userRequestDto.getPassword()));
+        if(userRepository.existsByEmail(userRequestDto.getEmail())) {
+            throw new EmailAlreadyExistsException(
+                    "email " + userRequestDto.getEmail() + " is already in use"
+            );
         }
 
-        return userMapper.toResponseDto(existingUser);
+        existingUser.setUsername(userRequestDto.getUsername());
+        existingUser.setEmail(userRequestDto.getEmail());
+        existingUser.setPassword(passwordEncoder.encode(userRequestDto.getPassword()));
+
+        return userMapper.toResponseDto(existingUser, "User Updated Successfully");
     }
 
     public void deleteById(Long id) {
-        if(!userRepository.existsById(id)) {
-            throw new UserNotFoundException("User with id: " + id + " not found");
-        }
-        userRepository.deleteById(id);
+        User user = userRepository.findById(id)
+                .orElseThrow(
+                        () -> new UserNotFoundException("User with id: " + id + " not found")
+                );
+        userRepository.delete(user);
     }
 }
