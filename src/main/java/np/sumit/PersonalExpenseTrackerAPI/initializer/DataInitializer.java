@@ -1,4 +1,4 @@
-package np.sumit.PersonalExpenseTrackerAPI.config;
+package np.sumit.PersonalExpenseTrackerAPI.initializer;
 
 import np.sumit.PersonalExpenseTrackerAPI.entity.ERole;
 import np.sumit.PersonalExpenseTrackerAPI.entity.Role;

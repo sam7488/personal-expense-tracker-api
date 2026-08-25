@@ -3,6 +3,7 @@ package np.sumit.PersonalExpenseTrackerAPI.service;
 import np.sumit.PersonalExpenseTrackerAPI.entity.CustomUserDetails;
 import np.sumit.PersonalExpenseTrackerAPI.entity.User;
 import np.sumit.PersonalExpenseTrackerAPI.repository.UserRepository;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import np.sumit.PersonalExpenseTrackerAPI.exception.UsernameNotFoundException;
@@ -19,7 +20,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("Username " + username + " does not exist"));
+                .orElseThrow(() -> new BadCredentialsException("Invalid username or password"));
 
         return new CustomUserDetails(user);
     }

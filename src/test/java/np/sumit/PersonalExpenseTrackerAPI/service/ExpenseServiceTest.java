@@ -9,6 +9,7 @@ import np.sumit.PersonalExpenseTrackerAPI.exception.ExpenseNotFoundException;
 import np.sumit.PersonalExpenseTrackerAPI.exception.InvalidDateRangeException;
 import np.sumit.PersonalExpenseTrackerAPI.mapper.ExpenseMapper;
 import np.sumit.PersonalExpenseTrackerAPI.repository.ExpenseRepository;
+import np.sumit.PersonalExpenseTrackerAPI.security.CurrentUserService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

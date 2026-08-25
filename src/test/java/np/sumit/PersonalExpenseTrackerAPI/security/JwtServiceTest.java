@@ -1,4 +1,4 @@
-package np.sumit.PersonalExpenseTrackerAPI.service;
+package np.sumit.PersonalExpenseTrackerAPI.security;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -1,4 +1,4 @@
-package np.sumit.PersonalExpenseTrackerAPI.service;
+package np.sumit.PersonalExpenseTrackerAPI.security;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;

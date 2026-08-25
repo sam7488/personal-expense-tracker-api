@@ -3,7 +3,7 @@ package np.sumit.PersonalExpenseTrackerAPI.controller;
 import jakarta.validation.Valid;
 import np.sumit.PersonalExpenseTrackerAPI.dto.request.LoginRequestDto;
 import np.sumit.PersonalExpenseTrackerAPI.dto.response.LoginResponseDto;
-import np.sumit.PersonalExpenseTrackerAPI.service.AuthService;
+import np.sumit.PersonalExpenseTrackerAPI.security.AuthService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

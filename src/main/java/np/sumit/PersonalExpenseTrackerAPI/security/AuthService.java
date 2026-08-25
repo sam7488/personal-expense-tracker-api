@@ -1,4 +1,4 @@
-package np.sumit.PersonalExpenseTrackerAPI.service;
+package np.sumit.PersonalExpenseTrackerAPI.security;
 
 import np.sumit.PersonalExpenseTrackerAPI.dto.response.LoginResponseDto;
 import org.springframework.security.authentication.AuthenticationManager;

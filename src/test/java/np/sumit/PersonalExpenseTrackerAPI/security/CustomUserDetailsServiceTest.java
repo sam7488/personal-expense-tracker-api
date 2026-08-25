@@ -1,9 +1,10 @@
-package np.sumit.PersonalExpenseTrackerAPI.service;
+package np.sumit.PersonalExpenseTrackerAPI.security;
 
 import np.sumit.PersonalExpenseTrackerAPI.entity.CustomUserDetails;
 import np.sumit.PersonalExpenseTrackerAPI.entity.User;
 import np.sumit.PersonalExpenseTrackerAPI.exception.UsernameNotFoundException;
 import np.sumit.PersonalExpenseTrackerAPI.repository.UserRepository;
+import np.sumit.PersonalExpenseTrackerAPI.service.CustomUserDetailsService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

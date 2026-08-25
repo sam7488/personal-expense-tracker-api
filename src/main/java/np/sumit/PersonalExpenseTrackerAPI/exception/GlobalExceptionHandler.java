@@ -3,6 +3,7 @@ package np.sumit.PersonalExpenseTrackerAPI.exception;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -89,6 +90,23 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
     }
 
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity<ErrorResponse> handleBadCredentials(
+            BadCredentialsException ex) {
+
+        ErrorResponse errorResponse = new ErrorResponse(
+                "INVALID_USERNAME_OR_PASSWORD",
+                ex.getMessage(),
+                HttpStatus.UNAUTHORIZED.value(),
+                Instant.now()
+        );
+
+        return ResponseEntity
+                .status(HttpStatus.UNAUTHORIZED)
+                .body(errorResponse);
+    }
+
+
     @ExceptionHandler(InvalidUsernameException.class)
     public ResponseEntity<ErrorResponse> handleInvalidUserName(InvalidUsernameException ex) {
         ErrorResponse errorResponse = new ErrorResponse(
@@ -111,18 +129,6 @@ public class GlobalExceptionHandler {
         );
 
         return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
-    }
-
-    @ExceptionHandler(UsernameNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleUserNameNotFoundException(UsernameNotFoundException ex) {
-        ErrorResponse errorResponse = new ErrorResponse(
-                "USERNAME_NOT_FOUND",
-                ex.getMessage(),
-                HttpStatus.NOT_FOUND.value(),
-                Instant.now()
-        );
-
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
     }
 
     @ExceptionHandler(UserIdentifierRequiredException.class)

@@ -1,4 +1,4 @@
-package np.sumit.PersonalExpenseTrackerAPI.service;
+package np.sumit.PersonalExpenseTrackerAPI.security;
 
 import np.sumit.PersonalExpenseTrackerAPI.dto.response.LoginResponseDto;
 import org.junit.jupiter.api.Test;
@@ -53,8 +53,6 @@ public class AuthServiceTest {
         String username = "username";
         String password = "password";
 
-        Authentication authentication = mock(Authentication.class);
-
         when(authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(username, password)
         )).thenThrow(new BadCredentialsException("Invalid Credentials"));
@@ -70,6 +68,5 @@ public class AuthServiceTest {
         verify(authenticationManager).authenticate(
                 new UsernamePasswordAuthenticationToken(username, password)
         );
-        verify(jwtService, never()).generateToken(authentication);
     }
 }

@@ -11,6 +11,7 @@ import np.sumit.PersonalExpenseTrackerAPI.exception.ExpenseNotFoundException;
 import np.sumit.PersonalExpenseTrackerAPI.exception.InvalidDateRangeException;
 import np.sumit.PersonalExpenseTrackerAPI.mapper.ExpenseMapper;
 import np.sumit.PersonalExpenseTrackerAPI.repository.ExpenseRepository;
+import np.sumit.PersonalExpenseTrackerAPI.security.CurrentUserService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -1,4 +1,4 @@
-package np.sumit.PersonalExpenseTrackerAPI.service;
+package np.sumit.PersonalExpenseTrackerAPI.security;
 
 import np.sumit.PersonalExpenseTrackerAPI.entity.User;
 import np.sumit.PersonalExpenseTrackerAPI.exception.UserNotFoundException;
