@@ -8,6 +8,6 @@ import np.sumit.PersonalExpenseTrackerAPI.entity.ERole;
 @Getter
 @AllArgsConstructor
 public class RoleRequestDto {
-    @NotNull
+    @NotNull(message = "Role name is required")
     private ERole role;
 }

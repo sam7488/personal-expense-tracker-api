@@ -106,7 +106,6 @@ public class GlobalExceptionHandler {
                 .body(errorResponse);
     }
 
-
     @ExceptionHandler(InvalidUsernameException.class)
     public ResponseEntity<ErrorResponse> handleInvalidUserName(InvalidUsernameException ex) {
         ErrorResponse errorResponse = new ErrorResponse(

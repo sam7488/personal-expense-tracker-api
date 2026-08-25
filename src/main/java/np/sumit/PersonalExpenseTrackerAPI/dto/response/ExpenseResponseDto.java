@@ -3,6 +3,7 @@ package np.sumit.PersonalExpenseTrackerAPI.dto.response;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import np.sumit.PersonalExpenseTrackerAPI.entity.Category;
 import np.sumit.PersonalExpenseTrackerAPI.entity.Expense;
@@ -22,6 +23,7 @@ import java.time.LocalDateTime;
 })
 @Getter
 @Setter
+@NoArgsConstructor
 @AllArgsConstructor
 public class ExpenseResponseDto {
     private Long id;

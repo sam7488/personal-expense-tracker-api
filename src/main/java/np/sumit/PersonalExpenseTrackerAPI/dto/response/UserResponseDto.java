@@ -18,7 +18,7 @@ import lombok.Setter;
 })
 public class UserResponseDto {
     private Long id;
-    private String userName;
+    private String username;
     private String email;
     private String message;
 }
