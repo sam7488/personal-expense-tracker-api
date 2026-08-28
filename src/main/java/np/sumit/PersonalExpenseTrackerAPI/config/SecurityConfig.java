@@ -35,7 +35,7 @@ public class SecurityConfig {
     @Bean
     public AuthenticationManager authenticationManager(
             AuthenticationConfiguration configuration
-    ) throws Exception {
+    ) {
         return configuration.getAuthenticationManager();
     }
 
@@ -53,7 +53,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(
             HttpSecurity http,
             DaoAuthenticationProvider provider
-            ) throws Exception {
+            ) {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authenticationProvider(provider)

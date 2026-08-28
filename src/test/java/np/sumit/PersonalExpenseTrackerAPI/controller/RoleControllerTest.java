@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
@@ -103,13 +102,6 @@ public class RoleControllerTest {
                 .andExpect(content().json(objectMapper.writeValueAsString(roleResponseDto)));
 
         verify(roleService).createRole(any(RoleRequestDto.class));
-    }
-
-
-    public ResponseEntity<RoleResponseDto> updateRole(
-            @RequestParam Long id, @RequestBody RoleRequestDto req) {
-        RoleResponseDto responseDto = roleService.updateRole(id, req);
-        return ResponseEntity.ok(responseDto);
     }
 
     @Test
